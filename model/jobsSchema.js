@@ -15,7 +15,7 @@ const jobDetailsSchema=mongoose.Schema(
             required:true,
 
         },
-        Salary:{
+        salary:{
             type:String,
             required:true,
         }

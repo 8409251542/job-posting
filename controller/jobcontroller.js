@@ -1,19 +1,33 @@
-const jobList = (req, res) => {
+const jobSchema=require("../model/jobsSchema")
+const jobList =async (req, res) => {
     try {
-        return res.json({
-            jobTitle: 'Insurance Consultant',
-            company: 'CoverYou',
-            location: 'Gurgaon',
-            experience: '0-2 years',
-            salary: '₹ 3,00,000 - 4,50,000'
+        const jobList=await jobSchema.find();
+        res.json({
+            success:true,
+            message:"Job Added Successfully!",
+            results:jobList
         })
     } catch (error) {
         console.log("error Found:",error);
     }
 }
 
+const addJob = async (req,res)=>{
+    try {
+        //console.log(req.body);
+        await jobSchema.create(req.body);
+        res.json({
+            success:true,
+            message:"Job Added Successfully!"
+        })
+    } catch (error) {
+        console.log("Some Error found while adding the job!",error);
+    }
+}
+
 const jobController={
-    jobList
+    jobList,
+    addJob
 }
 
 module.exports=jobController;
